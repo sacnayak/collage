@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.RectF;
 
 /**
  * Created by snayak on 10/9/15.
@@ -21,9 +22,10 @@ public class SimpleFrame extends ArtistBase {
 
     public void initialize(float x, float y, float w, float h) {
         setPosition(new PointF(x, y));
-        setSize(w,h);
+        setSize(w, h);
     }
 
+    @Override
     public void draw(Canvas onCanvas) {
         //draw current SimpleFrame object
         Paint rectPaint = new Paint();
@@ -31,7 +33,7 @@ public class SimpleFrame extends ArtistBase {
         rectPaint.setStrokeWidth(1);
         rectPaint.setStyle(Paint.Style.STROKE);
         rectPaint.setColor(Color.BLACK);
-        onCanvas.drawRect(getX(), getY(), (getX()+getW()), (getY()+getH()), rectPaint);
+        onCanvas.drawRect(0, 0, getW()-1, getH()-1, rectPaint);
         //call child objects to paint themselves
         for (Artist child : mChildren) {
             onCanvas.save();

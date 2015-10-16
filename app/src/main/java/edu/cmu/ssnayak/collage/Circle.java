@@ -1,5 +1,8 @@
 package edu.cmu.ssnayak.collage;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
@@ -48,22 +51,51 @@ public class Circle extends ArtistBase{
 
         //Calculate the degrees of separation b/w each child
         float degreeOfSeparation = CIRCLE_DEGREES/(float) numChildren;
-
+        float translatedCenterX = this.mCenter.x - getX();
+        float translatedCenterY = this.mCenter.y - getY();
         //initialize the x,y's for the first child in the iteration child
-        float x = this.mlayoutRadius;
-        float y = 0;
+        float x = translatedCenterX + this.mlayoutRadius;
+        float y = translatedCenterY;
+        int count = 1;
         for (Artist child : mChildren) {
             //set the co-ordinates of each child starting from y=0, x=layoutRadius
-            child.setX(x);
-            child.setY(y);
+            child.setX(x - child.getW()/(float) 2);
+            child.setY(y - child.getH()/(float) 2);
 
             //math to calculate new co-ordinates
-            x+= this.mlayoutRadius*Math.cos(Math.toRadians(degreeOfSeparation));
-            y+= this.mlayoutRadius*Math.sin(Math.toRadians(degreeOfSeparation));
+            x = translatedCenterX + (float) (this.mlayoutRadius*Math.cos(Math.toRadians(degreeOfSeparation*count)));
+            y = translatedCenterY + (float) (this.mlayoutRadius*Math.sin(Math.toRadians(degreeOfSeparation*count)));
+            count++;
             //call doLayout for each of it's children to traverse down the tree
             child.doLayout();
         }
     }
+
+//    /**
+//     * Test Code
+//     * Uncomment/Comment below code to see alignment
+//     * @param onCanvas
+//     */
+//    public void draw(Canvas onCanvas) {
+//        Paint paint = new Paint();
+//        paint.setStyle(Paint.Style.STROKE);
+//        paint.setColor(Color.BLACK);
+//        paint.setStrokeWidth(4);
+//
+//        float translatedCenterX = this.mCenter.x - getX();
+//        float translatedCenterY = this.mCenter.y - getY();
+//
+//        onCanvas.drawPoint(translatedCenterX, translatedCenterY, paint);
+//        onCanvas.drawCircle(translatedCenterX, translatedCenterY, this.mlayoutRadius, paint);
+//
+//        for (Artist child : mChildren) {
+//            onCanvas.save();
+//            onCanvas.translate(child.getX(), child.getY());
+//            onCanvas.clipRect(0, 0, child.getW(), child.getH());
+//            child.draw(onCanvas);
+//            onCanvas.restore();
+//        }
+//    }
 
 
     public void setLayoutRadius(float layoutRadius) {

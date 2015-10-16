@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 
 /**
@@ -18,7 +19,6 @@ public class TextArtist extends ArtistBase {
     protected String mText;
     protected Typeface mFace;
     protected float mTextSize;
-    protected Rect mBounds;
 
     public TextArtist(float x, float y, String text, Typeface face, float textSize) {
         super();
@@ -32,21 +32,32 @@ public class TextArtist extends ArtistBase {
         this.mText = text;
         this.mFace = face;
         this.mTextSize = textSize;
+        //set the paint characteristics
+        setPaint(face, textSize);
 
-        setBounds();
+        setBounds(x, y);
     }
 
-    private void setBounds() {
-        this.mBounds = new Rect(100,100,100,100);
+    private void setPaint(Typeface face, float textSize) {
+        Paint textPaint = new Paint();
+        textPaint.setColor(Color.BLACK);
+        textPaint.setStyle(Paint.Style.FILL);
+        textPaint.setTypeface(face);
+        textPaint.setTextSize(textSize);
+        this.mPaint = textPaint;
+    }
+
+    private void setBounds(float x, float y) {
+        Rect bounds = new Rect();
+        mPaint.getTextBounds(mText,0,mText.length(),bounds);
+        int height = bounds.height();
+        int width = bounds.width();
+        this.mBoundingRect = new RectF(getX(),0,width,height);
     }
 
     public void draw(Canvas onCanvas) {
         //draw text
-        Paint textPaint = new Paint();
-        textPaint.setColor(Color.BLACK);
-        textPaint.setTypeface(this.mFace);
-        textPaint.setTextSize(this.mTextSize);
-        onCanvas.drawText(this.mText, getX(), getY(), textPaint);
+        onCanvas.drawText(this.mText, 0, (0 + this.mBoundingRect.height()), mPaint);
         //call child objects to paint themselves
         for (Artist child : mChildren) {
             onCanvas.save();
@@ -57,11 +68,13 @@ public class TextArtist extends ArtistBase {
         }
     }
 
+    @Override
     public float getW() {
-        return this.mBounds.width();
+        return this.mBoundingRect.width();
     }
 
     public float getH() {
-        return this.mBounds.height();
+        return this.mBoundingRect.height();
     }
+
 }

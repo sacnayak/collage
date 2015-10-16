@@ -22,7 +22,7 @@ public class Column extends ArtistBase {
             //set the Y values of each of the children
             y+= child.getH();
             //all of it's children are vertically centered
-            child.setW(this.getW()/(float) 2);
+            child.setX((this.getW()/(float) 2) - child.getW()/(float) 2);
 
             //call doLayout for each of it's children to traverse down the tree
             child.doLayout();

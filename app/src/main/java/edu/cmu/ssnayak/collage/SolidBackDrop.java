@@ -29,8 +29,8 @@ public class SolidBackDrop extends ArtistBase {
         //draw current SolidBackDrop object
         Paint rectPaint = new Paint();
         rectPaint.setStyle(Paint.Style.FILL);
-        rectPaint.setColor(Color.BLACK);
-        onCanvas.drawRect(getX(), getY(), (getX()+getW()), (getY()+getH()), rectPaint);
+        rectPaint.setColor(this.mColor);
+        onCanvas.drawRect(0, 0, getW(), getH(), rectPaint);
         //call child objects to paint themselves
         for (Artist child : mChildren) {
             onCanvas.save();

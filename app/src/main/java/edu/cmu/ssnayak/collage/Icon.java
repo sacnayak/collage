@@ -30,7 +30,7 @@ public class Icon extends ArtistBase {
 
     public void draw(Canvas onCanvas) {
         //draw current SimpleFrame object
-        onCanvas.drawBitmap(this.image, getX()-10, getY()-10, null);
+        onCanvas.drawBitmap(this.image, 0, 0, null);
         //call child objects to paint themselves
         for (Artist child : mChildren) {
             onCanvas.save();

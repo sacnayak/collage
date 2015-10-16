@@ -26,17 +26,19 @@ public class OvalClip extends ArtistBase {
 
 
     public void draw(Canvas onCanvas) {
+        Path ovalPath = new Path();
+        ovalPath.addOval(this.mBoundingRect, Path.Direction.CW);
+
         for (Artist child : mChildren) {
             onCanvas.save();
             onCanvas.translate(child.getX(), child.getY());
-            onCanvas.clipRect(0, 0, child.getW(), child.getH());
+            //onCanvas.clipRect(0, 0, child.getW(), child.getH());
+            //create an oval clipping mask
+            onCanvas.clipPath(ovalPath);
             child.draw(onCanvas);
             onCanvas.restore();
         }
-        //creata an oval clipping mask on top of the child drawings
-        Path ovalPath = new Path();
-        ovalPath.addOval(this.mBoundingRect, Path.Direction.CW);
-        onCanvas.clipPath(ovalPath);
+
     }
 
 

@@ -23,7 +23,7 @@ public class Row extends ArtistBase {
             //set the x values of each of the children
             x+= child.getW();
             //all of it's children are vertically centered
-            child.setY(this.getH()/(float) 2);
+            child.setY((this.getH()/(float) 2) - child.getH()/(float) 2);
 
             //call doLayout for each of it's children to traverse down the tree
             child.doLayout();

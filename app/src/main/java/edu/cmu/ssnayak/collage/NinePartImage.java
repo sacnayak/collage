@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.NinePatch;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.NinePatchDrawable;
 
 /**
@@ -28,12 +29,8 @@ public class NinePartImage extends ArtistBase {
 
     public void draw(Canvas onCanvas) {
         //draw current NinePartImage object
-        //FIXME - how to fetch resources
-        NinePatchDrawable ninePatchDrawable = new NinePatchDrawable(Resources.getSystem(), this.mNinePatches);
-        Rect bounds = new Rect();
-        bounds.set((int) getX(), (int) getY(),(int) (getX()+getW()),(int) (getY()+getH()));
-        ninePatchDrawable.setBounds(bounds);
-        ninePatchDrawable.draw(onCanvas);
+        RectF rectBounds = new RectF(0,0,getW(),getH());
+        this.mNinePatches.draw(onCanvas, rectBounds);
 
         //call child objects to paint themselves
         for (Artist child : mChildren) {
