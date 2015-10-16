@@ -58,7 +58,7 @@ public class ArtistView extends View {
 	/* . . . . . . . . . . . . . . . . . . . . . . . . . */
 	/**
 	 * Constructor for use in simple programatic creation.
-	 * @param the Context this object is running in, through which it can access 
+	 * @param context Context this object is running in, through which it can access
 	 *        the current theme, resources, etc.
 	 */
 	public ArtistView(Context context) {
@@ -69,7 +69,7 @@ public class ArtistView extends View {
 	/* . . . . . . . . . . . . . . . . . . . . . . . . . */
 	/**
 	 * Constructor for use in XML-based creation.
-	 * @param the Context this object is running in, through which it can access 
+	 * @param context Context this object is running in, through which it can access
 	 *        the current theme, resources, etc.
 	 * @param attrs   the attributes of the tag that is inflating this object
 	 */

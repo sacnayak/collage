@@ -175,7 +175,6 @@ public class ArtistBase extends ArtistPrebase {
 			onCanvas.save();
 			onCanvas.translate(child.getX(), child.getY());
 			onCanvas.clipRect(0, 0, child.getW(), child.getH());
-			//onCanvas.clipRect(new RectF(0, 0, child.getW(), child.getH()));
 			child.draw(onCanvas);
 			onCanvas.restore();
 		}
