@@ -18,7 +18,7 @@ public class TextArtist extends ArtistBase {
     protected String mText;
     protected Typeface mFace;
     protected float mTextSize;
-    Rect mBounds;
+    protected Rect mBounds;
 
     public TextArtist(float x, float y, String text, Typeface face, float textSize) {
         super();
@@ -37,15 +37,11 @@ public class TextArtist extends ArtistBase {
     }
 
     private void setBounds() {
-        Paint textPaint = new Paint();
-        Rect bounds = new Rect();
-        textPaint.setTextSize(this.mTextSize);
-        textPaint.setTypeface(this.mFace);
-        textPaint.getTextBounds(this.mText, 0, this.mText.length(), bounds);
-        this.mBounds = bounds;
+        this.mBounds = new Rect(100,100,100,100);
     }
 
     public void draw(Canvas onCanvas) {
+        //draw text
         Paint textPaint = new Paint();
         textPaint.setColor(Color.BLACK);
         textPaint.setTypeface(this.mFace);
