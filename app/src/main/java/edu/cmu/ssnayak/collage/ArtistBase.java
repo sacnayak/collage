@@ -7,6 +7,13 @@ import android.graphics.RectF;
 
 import java.util.ArrayList;
 
+/**
+ * Implementation of ArtistPrebase for a simple manual
+ * layout of an Artist Object consumed in ArtistView
+ *
+ * Custom Artist implementations should inherit this class
+ *
+ */
 public class ArtistBase extends ArtistPrebase {
 	protected PointF mPos;
 	protected float mWidth;

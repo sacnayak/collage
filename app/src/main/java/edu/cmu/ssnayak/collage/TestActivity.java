@@ -27,16 +27,30 @@ public class TestActivity extends Activity {
         return /* replace this: */ new ArtistBase();
 	}
 
+    /*MY UNIT TEST CASES START*/
+
+    /**
+     * unit test case for simple frame drawing
+     * @return
+     */
 	protected Artist buildSimpleFrame() {
         SimpleFrame simpleFrame = new SimpleFrame(20, 20, 400, 400);
         return simpleFrame;
     }
 
+    /**
+     * unit test case for solid rectangle drawing
+     * @return
+     */
     protected Artist buildSolidBackDrop() {
         SolidBackDrop solidBackDrop = new SolidBackDrop(10, 10, 400, 800, Color.GRAY);
         return solidBackDrop;
     }
 
+    /**
+     * unit test case for icon drawing
+     * @return
+     */
     protected Artist buildIcon() {
         Bitmap iconBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ic_launcher);
         Bitmap iconScaled = Bitmap.createScaledBitmap(iconBitmap, 300, 300, false);
@@ -51,11 +65,19 @@ public class TestActivity extends Activity {
         return ninePartImage;
     }
 
+    /**
+     * Unit test case for text artist
+     * @return
+     */
     protected TextArtist buildTextArtist() {
         TextArtist textArtist = new TextArtist(0, 0, "SSUI Rocks!!!!", Typeface.DEFAULT_BOLD, 50f);
         return textArtist;
     }
 
+    /**
+     * unit test case for pile layout
+     * @return
+     */
     protected Pile buildPile() {
         Pile pile = new Pile(5, 200, 200, 100);
         pile.addChild(new SolidBackDrop(0, 100, 900, 900, Color.GRAY));
@@ -63,6 +85,10 @@ public class TestActivity extends Activity {
         return pile;
     }
 
+    /**
+     * unit test case for row layout
+     * @return
+     */
     protected Row buildRow() {
         Row row = new Row(0, 0, 500, 500);
         row.addChild(new SolidBackDrop(0, 0, 50, 150, Color.GRAY));
@@ -71,6 +97,10 @@ public class TestActivity extends Activity {
         return row;
     }
 
+    /**
+     * unit test case for build Column
+     * @return
+     */
     protected Column buildColumn() {
         Column col = new Column(0, 0, 500, 500);
         col.addChild(new SolidBackDrop(0, 0, 50, 150, Color.GRAY));
@@ -86,6 +116,10 @@ public class TestActivity extends Activity {
         return col;
     }
 
+    /**
+     * Unit test case for build circle
+     * @return
+     */
     protected Circle buildCircle() {
         Circle circle = new Circle(10, 10, 500, 500, 255, 255, 100);
         circle.addChild(new SolidBackDrop(0, 0, 50, 50, Color.BLUE));
@@ -96,6 +130,10 @@ public class TestActivity extends Activity {
         return circle;
     }
 
+    /**
+     * Unit test case for Oval Clip
+     * @return
+     */
     protected OvalClip buildOvalClip() {
         OvalClip ovalClip = new OvalClip(0,0,400,600);
         ovalClip.addChild(new SolidBackDrop(0, 0, 1000, 1000, Color.GRAY));
@@ -103,6 +141,10 @@ public class TestActivity extends Activity {
         return ovalClip;
     }
 
+    /**
+     * My specialized subclass test case
+     * @return
+     */
     protected GoldenRectangle buildGoldenRectangle() {
         GoldenRectangle goldenRectangle = new GoldenRectangle(0, 0, 250, 404.5f);
         goldenRectangle.addChild(new SolidBackDrop(0,0, 600, 600, Color.GRAY));
@@ -118,6 +160,8 @@ public class TestActivity extends Activity {
 //        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.WHITE));
         return goldenRectangle;
     }
+
+    /*MY UNIT TEST CASES END*/
 
     /** Called when the activity is first created. */
     @Override

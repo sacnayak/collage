@@ -11,7 +11,7 @@ import android.graphics.PointF;
  * You are to provide the rest of this implementation to create a full base
  * class called ArtistBase (which must inherit from this class). 
  * 
- * @see ssuimobile.Collage.Artist
+ * @see edu.cmu.ssnayak.collage.Artist
  * @author Scott Hudson
  *
  */

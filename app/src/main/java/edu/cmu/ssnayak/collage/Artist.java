@@ -150,7 +150,6 @@ public interface Artist {
 	 * Set the height of this object.  Note: if this object has intrinsic size
 	 * (which will be indicated by the <code>sizeIsIntrinsic()</code> method
 	 * returning true), this call is silently ignored.
-	 * @param w the new width of the artist
 	 * @param h the new height of the artist
 	 */
 	public void setH(float h);
@@ -244,7 +243,7 @@ public interface Artist {
 	 * never contains "empty slots"). Attempts to remove non-existent children 
 	 * are ignored.  After this method, the removed child should report a null
 	 * parent.
-	 * @param indx the index of the child to be removed.
+	 * @param index the index of the child to be removed.
 	 */
 	public void removeChildAt(int index);
 	

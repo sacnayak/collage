@@ -16,15 +16,33 @@ import android.graphics.Typeface;
  */
 public class TextArtist extends ArtistBase {
 
+    //member variables required for TextArtist object
     protected String mText;
     protected Typeface mFace;
     protected float mTextSize;
 
+    /**
+     * constructor to intantiate a TextArtist object as per
+     * contract
+     * @param x
+     * @param y
+     * @param text
+     * @param face
+     * @param textSize
+     */
     public TextArtist(float x, float y, String text, Typeface face, float textSize) {
         super();
         initialize(x, y, text, face, textSize);
     }
 
+    /**
+     * private utility method to initialize all member variables
+     * @param x
+     * @param y
+     * @param text
+     * @param face
+     * @param textSize
+     */
     public void initialize(float x, float y, String text, Typeface face, float textSize) {
         setPosition(new PointF(x, y));
         super.isIntrinsic = true;
@@ -38,7 +56,13 @@ public class TextArtist extends ArtistBase {
         setBounds(x, y);
     }
 
-    private void setPaint(Typeface face, float textSize) {
+    /**
+     * Set default paint style for TextArtist.
+     * Can be modified by the client if required
+     * @param face
+     * @param textSize
+     */
+    public void setPaint(Typeface face, float textSize) {
         Paint textPaint = new Paint();
         textPaint.setColor(Color.BLACK);
         textPaint.setStyle(Paint.Style.FILL);
@@ -47,6 +71,11 @@ public class TextArtist extends ArtistBase {
         this.mPaint = textPaint;
     }
 
+    /**
+     * Define and set rectbounds for the Text
+     * @param x
+     * @param y
+     */
     private void setBounds(float x, float y) {
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText,0,mText.length(),bounds);
@@ -55,8 +84,17 @@ public class TextArtist extends ArtistBase {
         this.mBoundingRect = new RectF(getX(),0,width,height);
     }
 
+    /**
+     * Overriding parent draw method in order to perform specialized
+     * text drawing on canvas
+     * @param onCanvas
+     */
+    @Override
     public void draw(Canvas onCanvas) {
         //draw text
+        //the (0,0) of the text is at the bottom left of it's bounding box. So offset height in order
+        //to print in view
+        //FIXME notorious hack to offset text. Cleaner method?
         onCanvas.drawText(this.mText, 0, (0 + this.mBoundingRect.height()), mPaint);
         //call child objects to paint themselves
         for (Artist child : mChildren) {
@@ -68,11 +106,22 @@ public class TextArtist extends ArtistBase {
         }
     }
 
+    /**
+     * Overriding parent class implementation for
+     * ArtistView to render right width during onMeasure
+     * @return
+     */
     @Override
     public float getW() {
         return this.mBoundingRect.width();
     }
 
+    /**
+     * Overriding parent class implementation for
+     * ArtistView to render right height during onMeasure
+     * @return
+     */
+    @Override
     public float getH() {
         return this.mBoundingRect.height();
     }

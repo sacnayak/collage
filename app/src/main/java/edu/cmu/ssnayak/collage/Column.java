@@ -8,11 +8,25 @@ package edu.cmu.ssnayak.collage;
  */
 public class Column extends ArtistBase {
 
+    /**
+     * Constructor for Column Artist object as per contract
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
     public Column(float x, float y, float w, float h) {
+        super();
         setPosition(x, y);
         setSize(w, h);
     }
 
+    /**
+     * Overriding parent class doLayout to provide
+     * a specialized Column layout for all children.
+     *
+     * This layout horizontally centers all its children
+     */
     @Override
     public void doLayout() {
         //initialize y=0 for the coordinates of the first child

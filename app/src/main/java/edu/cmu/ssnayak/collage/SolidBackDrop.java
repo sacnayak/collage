@@ -14,17 +14,41 @@ public class SolidBackDrop extends ArtistBase {
 
     protected int mColor;
 
+    /**
+     * Constructor for a solid rectangular artist object
+     * as per contract
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param color
+     */
     public SolidBackDrop(float x, float y, float w, float h, int color) {
         super();
         initialize(x, y, w, h, color);
     }
 
-    public void initialize(float x, float y, float w, float h, int color) {
+    /**
+     * private utility method to initialize class member
+     * variables
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param color
+     */
+    private void initialize(float x, float y, float w, float h, int color) {
         setPosition(new PointF(x, y));
         setSize(w, h);
         this.mColor = color;
     }
 
+    /**
+     * Overriding the parent draw implementation to do specialized
+     * drawing for a rectangular solid block
+     * @param onCanvas
+     */
+    @Override
     public void draw(Canvas onCanvas) {
         //draw current SolidBackDrop object
         Paint rectPaint = new Paint();

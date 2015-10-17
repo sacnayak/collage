@@ -12,15 +12,28 @@ import android.graphics.PointF;
  */
 public class Icon extends ArtistBase {
 
+    //additional member variable to store bitmap image
     protected Bitmap image;
 
+    /**
+     * Constructor for Icon Artist Object as per contract
+     * @param x
+     * @param y
+     * @param image
+     */
     public Icon(float x, float y, Bitmap image) {
         super();
         initialize(x, y, image);
     }
 
+    /**
+     * private utility method to instantiate all member variables
+     * @param x
+     * @param y
+     * @param image
+     */
     public void initialize(float x, float y, Bitmap image) {
-        //Icon has an intrinsic size
+        //Icon has an intrinsic size and cannot be changed by the parent
         super.isIntrinsic = true;
         setPosition(new PointF(x, y));
         if(image!=null) {
@@ -28,6 +41,12 @@ public class Icon extends ArtistBase {
         }
     }
 
+    /**
+     * Overriding parent class implementation for drawing
+     * of an icon on canvas
+     * @param onCanvas
+     */
+    @Override
     public void draw(Canvas onCanvas) {
         //draw current SimpleFrame object
         onCanvas.drawBitmap(this.image, 0, 0, null);
@@ -41,10 +60,20 @@ public class Icon extends ArtistBase {
         }
     }
 
+    /**
+     * Overriding parent class implementation for
+     * ArtistView to render right width during onMeasure
+     * @return
+     */
     public float getW() {
         return this.image.getWidth();
     }
 
+    /**
+     * Overriding parent class implementation for
+     * ArtistView to render right height during onMeasure
+     * @return
+     */
     public float getH() {
         return this.image.getHeight();
     }

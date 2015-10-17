@@ -1,8 +1,5 @@
 package edu.cmu.ssnayak.collage;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
@@ -21,25 +18,50 @@ import android.graphics.RectF;
  */
 public class Circle extends ArtistBase{
 
+    //constant variable for circle degrees
     public static float CIRCLE_DEGREES = 360;
 
+    //custom member variables for Circle
     protected float mlayoutRadius;
     protected PointF mCenter;
 
+    /**
+     * Constructor for Circle Artist object as per contract
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param layoutCenterX
+     * @param layoutCenterY
+     * @param layoutRadius
+     */
     public Circle(float x, float y, float w, float h, float layoutCenterX, float layoutCenterY, float layoutRadius) {
+        super();
         setPosition(x, y);
         setSize(w, h);
         initialize(layoutCenterX, layoutCenterY, layoutRadius);
     }
 
+    /**
+     * Private implementation to set circle center coordinates and radius for
+     * the circle
+     * @param layoutCenterX
+     * @param layoutCenterY
+     * @param layoutRadius
+     */
     private void initialize(float layoutCenterX, float layoutCenterY, float layoutRadius) {
         setLayoutRadius(layoutRadius);
         setLayoutCenter(layoutCenterX, layoutCenterY);
         this.mBoundingRect = new RectF(0, 0, getW(), getH());
     }
 
+    /**
+     * Overriding parent class doLayout to provide
+     * a specialized circular layout for all children
+     */
     @Override
     public void doLayout() {
+
         //grab the number of children for the circle
         int numChildren = 0;
         if(mChildren != null) {
@@ -47,13 +69,17 @@ public class Circle extends ArtistBase{
         } else {
             return;
         }
-        if(numChildren == 0) return;
 
-        //Calculate the degrees of separation b/w each child
+        //return if no children to lay-out
+        if(numChildren == 0) {
+            return;
+        }
+
+        //Calculate the 'degrees of separation' b/w each child
         float degreeOfSeparation = CIRCLE_DEGREES/(float) numChildren;
 
 
-        //initialize the x,y's for the first child in the iteration child
+        //initialize the x,y's for the first child in the iteration
         float x = this.mCenter.x + this.mlayoutRadius;
         float y = this.mCenter.y;
         int count = 1;
@@ -62,17 +88,18 @@ public class Circle extends ArtistBase{
             child.setX(x - child.getW()/(float) 2);
             child.setY(y - child.getH() / (float) 2);
 
-            //math to calculate new co-ordinates
+            //math to calculate new child co-ordinates for the next iteration
             x = this.mCenter.x + (float) (this.mlayoutRadius*Math.cos(Math.toRadians(degreeOfSeparation*count)));
             y = this.mCenter.y + (float) (this.mlayoutRadius*Math.sin(Math.toRadians(degreeOfSeparation*count)));
             count++;
+
             //call doLayout for each of it's children to traverse down the tree
             child.doLayout();
         }
     }
 
 //    /**
-//     * Test Code
+//     * Test Code below to check alignment to circle visually
 //     * Uncomment/Comment below code to see alignment
 //     * @param onCanvas
 //     */
@@ -98,28 +125,30 @@ public class Circle extends ArtistBase{
 //    }
 
 
+    /**
+     * Setter for LayoutRadius
+     * @param layoutRadius
+     */
     public void setLayoutRadius(float layoutRadius) {
         this.mlayoutRadius = layoutRadius;
     }
 
-    public void setLayoutCenterX(float x) {
-        if (mCenter == null) {
-            mCenter = new PointF(0f,0f);
-        }
-        mCenter.set(x, mCenter.y);
-    }
-
-    public void setLayoutCenterY(float y) {
-        if (mCenter == null) {
-            mCenter = new PointF(0f,0f);
-        }
-        mCenter.set(mCenter.x, y);
-    }
-
+    /**
+     * Setter for the Circle Center
+     * @param x
+     * @param y
+     */
     public void setLayoutCenter(float x, float y) {
-        setLayoutCenterX(x);
-        setLayoutCenterY(y);
+        if (mCenter == null) {
+            mCenter = new PointF(0f,0f);
+        }
+        mCenter.set(x, y);
     }
+
+    /**
+     * Setter for the Circle Center
+     * @param pos
+     */
 
     public void setLayoutCenter(PointF pos) {
         if (pos != null) {
