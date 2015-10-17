@@ -35,7 +35,7 @@ public class Circle extends ArtistBase{
     private void initialize(float layoutCenterX, float layoutCenterY, float layoutRadius) {
         setLayoutRadius(layoutRadius);
         setLayoutCenter(layoutCenterX, layoutCenterY);
-        setBoundingRect(getX(), getY(), getX()+getW(), getY()+getH());
+        this.mBoundingRect = new RectF(0, 0, getW(), getH());
     }
 
     @Override
@@ -51,20 +51,20 @@ public class Circle extends ArtistBase{
 
         //Calculate the degrees of separation b/w each child
         float degreeOfSeparation = CIRCLE_DEGREES/(float) numChildren;
-        float translatedCenterX = this.mCenter.x - getX();
-        float translatedCenterY = this.mCenter.y - getY();
+
+
         //initialize the x,y's for the first child in the iteration child
-        float x = translatedCenterX + this.mlayoutRadius;
-        float y = translatedCenterY;
+        float x = this.mCenter.x + this.mlayoutRadius;
+        float y = this.mCenter.y;
         int count = 1;
         for (Artist child : mChildren) {
             //set the co-ordinates of each child starting from y=0, x=layoutRadius
             child.setX(x - child.getW()/(float) 2);
-            child.setY(y - child.getH()/(float) 2);
+            child.setY(y - child.getH() / (float) 2);
 
             //math to calculate new co-ordinates
-            x = translatedCenterX + (float) (this.mlayoutRadius*Math.cos(Math.toRadians(degreeOfSeparation*count)));
-            y = translatedCenterY + (float) (this.mlayoutRadius*Math.sin(Math.toRadians(degreeOfSeparation*count)));
+            x = this.mCenter.x + (float) (this.mlayoutRadius*Math.cos(Math.toRadians(degreeOfSeparation*count)));
+            y = this.mCenter.y + (float) (this.mlayoutRadius*Math.sin(Math.toRadians(degreeOfSeparation*count)));
             count++;
             //call doLayout for each of it's children to traverse down the tree
             child.doLayout();
@@ -84,7 +84,7 @@ public class Circle extends ArtistBase{
 //
 //        float translatedCenterX = this.mCenter.x - getX();
 //        float translatedCenterY = this.mCenter.y - getY();
-//
+//        onCanvas.drawRect(this.mBoundingRect, paint);
 //        onCanvas.drawPoint(translatedCenterX, translatedCenterY, paint);
 //        onCanvas.drawCircle(translatedCenterX, translatedCenterY, this.mlayoutRadius, paint);
 //
@@ -125,9 +125,5 @@ public class Circle extends ArtistBase{
         if (pos != null) {
             setLayoutCenter(pos.x, pos.y);
         }
-    }
-
-    private void setBoundingRect(float x, float y, float w, float h) {
-        this.mBoundingRect = new RectF(x, y, x+w, y+h);
     }
 }

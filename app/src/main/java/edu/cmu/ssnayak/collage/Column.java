@@ -13,7 +13,7 @@ public class Column extends ArtistBase {
         setSize(w, h);
     }
 
-
+    @Override
     public void doLayout() {
         //initialize y=0 for the coordinates of the first child
         float y = 0;
@@ -22,7 +22,7 @@ public class Column extends ArtistBase {
             //set the Y values of each of the children
             y+= child.getH();
             //all of it's children are vertically centered
-            child.setX((this.getW()/(float) 2) - child.getW()/(float) 2);
+            child.setX(((this.getW() / 2.0f)) - (child.getW() / 2.0f));
 
             //call doLayout for each of it's children to traverse down the tree
             child.doLayout();

@@ -38,14 +38,14 @@ public class TestActivity extends Activity {
     }
 
     protected Artist buildIcon() {
-        Bitmap iconBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.twitter_logo);
+        Bitmap iconBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ic_launcher);
         Bitmap iconScaled = Bitmap.createScaledBitmap(iconBitmap, 300, 300, false);
         Icon icon = new Icon(10, 10, iconScaled);
         return icon;
     }
 
     protected NinePartImage buildNinePartImage() {
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.ninepatch_source);
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bluebutton);
         NinePatch patches = new NinePatch(bitmap, bitmap.getNinePatchChunk(), null);
         NinePartImage ninePartImage = new NinePartImage(10,10,200,200,patches);
         return ninePartImage;
@@ -87,7 +87,7 @@ public class TestActivity extends Activity {
     }
 
     protected Circle buildCircle() {
-        Circle circle = new Circle(10, 10, 500, 500, 200, 200, 100);
+        Circle circle = new Circle(10, 10, 500, 500, 255, 255, 100);
         circle.addChild(new SolidBackDrop(0, 0, 50, 50, Color.BLUE));
         circle.addChild(new SolidBackDrop(0, 0, 50, 50, Color.RED));
         circle.addChild(new SolidBackDrop(0, 0, 50, 50, Color.GREEN));
@@ -98,8 +98,21 @@ public class TestActivity extends Activity {
 
     protected OvalClip buildOvalClip() {
         OvalClip ovalClip = new OvalClip(0,0,400,600);
-        ovalClip.addChild(new SolidBackDrop(0, 0, 400, 600, Color.GRAY));
+        ovalClip.addChild(new SolidBackDrop(0, 0, 1000, 1000, Color.GRAY));
+        ovalClip.addChild(new SolidBackDrop(200, 0, 1000, 1000, Color.BLACK));
         return ovalClip;
+    }
+
+    protected GoldenRectangle buildGoldenRectangle() {
+        GoldenRectangle goldenRectangle = new GoldenRectangle(0, 0, 600, 400);
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.GRAY));
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.BLACK));
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.WHITE));
+//        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.WHITE));
+//        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.GRAY));
+//        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.BLACK));
+//        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.WHITE));
+        return goldenRectangle;
     }
 
     /** Called when the activity is first created. */
@@ -110,7 +123,7 @@ public class TestActivity extends Activity {
 
         // create an ArtistView widget and install a generated test tree there
         ArtistView root = new ArtistView(this);
-        root.setChildArtist(buildOvalClip());
+        root.setChildArtist(buildTest2());
         
         // put that widget in a frame so we have a layout object above it to 
         // listen to the fact that it doesn't want to be expanded to fill the
@@ -226,8 +239,8 @@ public class TestActivity extends Activity {
 		if(allAtOrigin){
 			rootArtist.addChild(new SimpleFrame(0, 0, 20, 20));
 			rootArtist.addChild(new SolidBackDrop(0, 0, 20, 20, Color.BLUE));
-			rootArtist.addChild(new Icon(0, 0, BitmapFactory.decodeResource(getResources(), R.drawable.twitter_logo)));
-			Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.ninepatch_source);
+			rootArtist.addChild(new Icon(0, 0, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)));
+			Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bluebutton);
 			NinePatch patches = new NinePatch(bitmap, bitmap.getNinePatchChunk(), null);
 			rootArtist.addChild(new NinePartImage(0, 0, 200, 20, patches));
 			rootArtist.addChild(new TextArtist(0, 0, "SSUI RoCkS!!!!", Typeface.DEFAULT_BOLD, 50f));
@@ -235,8 +248,8 @@ public class TestActivity extends Activity {
 		else{
 			rootArtist.addChild(new SimpleFrame(5, 5, 20, 20));
 			rootArtist.addChild(new SolidBackDrop(5, 30, 20, 20, Color.BLUE));
-			rootArtist.addChild(new Icon(5, 55, BitmapFactory.decodeResource(getResources(), R.drawable.twitter_logo)));
-			Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.ninepatch_source);
+			rootArtist.addChild(new Icon(5, 55, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)));
+			Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bluebutton);
 			NinePatch patches = new NinePatch(bitmap, bitmap.getNinePatchChunk(), null);
 			rootArtist.addChild(new NinePartImage(30, 5, 200, 20, patches));
 			rootArtist.addChild(new TextArtist(30, 30, "SSUI RoCkS!!!!", Typeface.DEFAULT_BOLD, 50f));

@@ -17,24 +17,20 @@ public class OvalClip extends ArtistBase {
         setPosition(new PointF(x, y));
         setSize(w, h);
         //assuming position and size are defined correctly
-        setBoundingRect(getX(), getY(), getX() + getW(), getY() + getH());
     }
-
-    private void setBoundingRect(float x, float y, float w, float h) {
-        this.mBoundingRect = new RectF(x, y, x + w, y + h);
-    }
-
 
     public void draw(Canvas onCanvas) {
         Path ovalPath = new Path();
-        ovalPath.addOval(this.mBoundingRect, Path.Direction.CW);
+        RectF bounds = new RectF(0, 0, getW(), getH());
+        ovalPath.addOval(bounds, Path.Direction.CW);
+
+        //create an oval clipping mask
+        onCanvas.clipPath(ovalPath);
 
         for (Artist child : mChildren) {
             onCanvas.save();
             onCanvas.translate(child.getX(), child.getY());
-            //onCanvas.clipRect(0, 0, child.getW(), child.getH());
-            //create an oval clipping mask
-            onCanvas.clipPath(ovalPath);
+            onCanvas.clipRect(0, 0, child.getW(), child.getH());
             child.draw(onCanvas);
             onCanvas.restore();
         }
