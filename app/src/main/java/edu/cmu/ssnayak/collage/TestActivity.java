@@ -104,10 +104,14 @@ public class TestActivity extends Activity {
     }
 
     protected GoldenRectangle buildGoldenRectangle() {
-        GoldenRectangle goldenRectangle = new GoldenRectangle(0, 0, 600, 400);
-        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.GRAY));
-        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.BLACK));
-        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.WHITE));
+        GoldenRectangle goldenRectangle = new GoldenRectangle(0, 0, 250, 404.5f);
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 600, 600, Color.GRAY));
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 600, 600, Color.BLACK));
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 600, 600, Color.RED));
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 600, 600, Color.GRAY));
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 600, 600, Color.GRAY));
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 600, 600, Color.BLACK));
+        goldenRectangle.addChild(new SolidBackDrop(0,0, 600, 600, Color.RED));
 //        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.WHITE));
 //        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.GRAY));
 //        goldenRectangle.addChild(new SolidBackDrop(0,0, 400, 600, Color.BLACK));
@@ -123,7 +127,7 @@ public class TestActivity extends Activity {
 
         // create an ArtistView widget and install a generated test tree there
         ArtistView root = new ArtistView(this);
-        root.setChildArtist(buildTest2());
+        root.setChildArtist(buildGoldenRectangle());
         
         // put that widget in a frame so we have a layout object above it to 
         // listen to the fact that it doesn't want to be expanded to fill the
