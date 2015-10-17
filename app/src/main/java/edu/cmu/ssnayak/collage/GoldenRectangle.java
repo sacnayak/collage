@@ -47,11 +47,15 @@ public class GoldenRectangle extends ArtistBase {
      */
     @Override
     public void doLayout() {
-        //if a horizontal rectangle ie width >= height
+        //this method has the logic for laying out Artist objects in a
+        //golden rectangle - layou
         float x = 0f, y = 0f;
+        //width and height of the object currently being layed out (the square in the golden rectangle)
         float w = getW(), h = getH();
+        //width and height of the object that will be layed out next (the rectangle after diving the parent)
         float otherW = getW(), otherH = getH();
 
+        //logic based on if the rectangle initialized is horizontal or vertical
         if(getW() > getH()) {
             w = getH();
             otherW-=w;
@@ -60,14 +64,22 @@ public class GoldenRectangle extends ArtistBase {
             otherH-=h;
         }
 
+        //logic
+        //step 1 - determine shorter side in rectangle.
+        //step 2 - layout square of shorter side length.
+        //step 3 - calculate the x, y, width and height of the other rectangle created
+        //       as a result of making the square
+        //step 4 - repeat the same for the other rectangle thus created
         if(mChildren!=null) {
             for (Artist child : mChildren) {
-                //set all the children
+                //set all the children and lay them out
                 child.setX(x);
                 child.setY(y);
                 child.setW(w);
                 child.setH(h);
 
+                //calculation of the parameters for the next child laying out
+                //phase. Offset the x, y accordingly.
                 if(otherW < otherH) {
                     x += w;
                     w = otherW;
